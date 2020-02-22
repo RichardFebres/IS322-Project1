@@ -1,0 +1,114 @@
+html, body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: crimson;
+}
+
+.app-container {
+    width: 1366px;
+    margin: auto;
+    display: flex;
+    min-height: 100%;
+    background-color: whitesmoke;
+}
+
+aside nav {
+    flex: 0 0 30px;
+    min-height: 100%;
+    background-color: whitesmoke;
+}
+
+nav a {
+    display: inline-block;
+    padding: 25px;
+    text-align: center;
+    color: crimson;
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: darkgray;
+}
+
+.content-container {
+    flex: 1 1 auto;
+    width: 100%;
+    margin: 15px;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.content-container .card {
+    height: 200px;
+    flex: 0 0 150px;
+    background-color: darkgray;
+    border: 5px solid black;
+    margin: 10px;
+}
+
+.footer-container {
+    width: 100%;
+    margin: 15px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    flex: 1 1 auto;
+    text-align: center;
+    justify-content: center;
+}
+
+@media only screen and (min-width: 1024px ) {
+    .app-container {
+        flex-direction: row;
+        width: 1024px;
+    }
+
+    aside nav {
+        min-height: auto;
+        flex: 0 0 50px;
+    }
+
+    nav a {
+        display: inline-block;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .app-container {
+        flex-direction: column;
+        width: 740px;
+    }
+
+    .content-container {
+        flex-basis: auto;
+        height: 350px;
+    }
+
+    nav a {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 411px) {
+    .app-container {
+        margin: 0 auto;
+        flex-direction: column;
+        width: calc(100% - 50px);
+    }
+
+    .content-container {
+        height: 30px;
+        flex-basis: 100%;
+    }
+
+    nav a {
+        display: block;
+    }
+}
