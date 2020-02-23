@@ -1,3 +1,4 @@
+// Product data here which will be used to create cards
 const mockData = [
     {
       title: "Retro Bred 4's",
@@ -12,7 +13,6 @@ const mockData = [
         type: ['low-top', 'walking'],
         price: 90.00
     },
-
 
     {
         title: "Air Hurache's",
@@ -56,5 +56,67 @@ const mockData = [
         price: 120.00
     },
 ];
-    
+
+// Categories to sort by
+const filterableCategories = ['high-top', 'low-top', 'basketball', 'running', 'walking'];
+
+// Constructor used to create objects to store cards and access root level element
+function ProductsFromDB (_element, products) {
+    let self = Object.create(ProductsFromDB);
+
+    // Generates cards and populates it with content from
+    let createCardFromData = ({title, image, price}) => {
+        let _card = document.createElement('div');
+        let _content = document.createElement('div');
+        let _title = document.createElement('div');
+        let _image = document.createElement('img');
+        let _price = document.createElement('div');
+
+        _card.className = 'card';
+        _content.className = 'card-content';
+        _title.className = 'title';
+        _title.textContent = title;
+        _image.className = 'image';
+        _image.src = `img/${_image}`;
+        _price.textContent = `${_price}`;
+
+        _content.appendChild(_title);
+        _content.appendChild(_image);
+        _content.appendChild(_price);
+
+        _card.appendChild(_content);
+
+        return _card;
+    };
+
+    // Renders product cards from newly constructed objects to be consumed by callbacks
+    function renderProductCards(callback) {
+
+        _element.innerHTML='';
+
+        callback(products).forEach((products) => {
+            let _card = createCardFromData(products);
+            _element.appendChild(_card);
+        });
+    }
+
+    // Define callbacks to be used for event listener
+
+
+}
+
+
+
+
+/* Event listener which hooks to select menus
+document.addEventListener('DOMContentLoaded', function(event) {
+    let byMenuOption =
+}
+
+ */
+
+
+
+
+
 
