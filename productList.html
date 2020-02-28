@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="description" content="E-Commerce IS322 Project 1">
         <meta name="author" content="Richard Febres">
-        <meta name="viewport" content="width=device-width, initial scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="main.css">
         <title>IS322-Project1</title>
     </head>
@@ -20,7 +20,7 @@
                 <div>
                     <label>Order By:</label>
                     <label>
-                        <select name="order-by">
+                        <select class="orderBy" name="order-by">
                             <option value="">Select An Option</option>
                             <option value="asc-title">Title...(Asc)</option>
                             <option value="desc-title">Title...(Desc)</option>
@@ -55,22 +55,21 @@
                     </label>
                 </div>
             </div>
-
-            <div class="content-container">
+            <div id="content-container">
 
             </div>
         </div>
-
-        <div class=footer-container>
-            <footer>
-                <p>E-Commerce Marketplace, LLC</p>
-                <p>712-538-8691</p>
-                <p>512 Mulhholland Drive
-                Santa Monica, California
-                90291
-                </p>
-            </footer>
-        </div>
         <script src="productList.js"></script>
     </body>
+
+    <div class=footer-container>
+        <footer>
+            <p>E-Commerce Marketplace, LLC</p>
+            <p>712-538-8691</p>
+            <p>512 Mulhholland Drive
+                Santa Monica, California
+                90291
+            </p>
+        </footer>
+    </div>
 </html>

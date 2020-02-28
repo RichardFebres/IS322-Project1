@@ -28,6 +28,12 @@ html, body {
     background-color: darkgrey;
 }
 
+.filter-container .orderBy, .price-range, .type {
+    display: block;
+    position: relative;
+    align-content: center;
+}
+
 .navigation a {
     padding: 5px;
     display: inline-block;
@@ -43,7 +49,7 @@ html, body {
     color: white;
 }
 
-.content-container {
+#content-container {
     flex: 1 1 auto;
     width: 100%;
     margin: 15px;
@@ -53,13 +59,27 @@ html, body {
     justify-content: left;
 }
 
-.content-container .card {
+#content-container .card {
     height: 200px;
     flex: 0 0 150px;
     background-color: darkgray;
     border: 5px solid black;
     margin: 10px;
 }
+
+#content-container > .title {
+    position: center;
+}
+
+#content-container > img {
+    max-width: 125px;
+    position: center;
+}
+#content-container > .price {
+    position: center;
+
+}
+
 
 .footer-container {
     width: 100%;
