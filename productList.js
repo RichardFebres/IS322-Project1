@@ -6,63 +6,59 @@
         {
           title: "Retro Bred 4's",
           image: "img/Bred_Retro4.jpg",
-          type: ['high-top', 'basketball'],
+          type: 'high-top',
           price: 250.00
         },
 
         {
             title: "Killshots",
             image: "img/Killshots.jpg",
-            type: ['low-top', 'walking'],
+            type:  'walking',
             price: 90.00
         },
 
         {
             title: "Air Hurache's",
             image: "img/Air_Hurache.jpg",
-            type: ['high-top', 'running'],
+            type: 'running',
             price: 110.00
         },
 
         {
             title: "LeBron 11 Silver-Wolf Grey",
             image: "img/Silver_Wolf_Gray_Lebron11.jpg",
-            type: ['high-top', 'basketball'],
+            type:  'basketball',
             price: 81.00
         },
 
         {
             title: "Puma Axelion Breathe",
             image: "img/Puma_Axelion_Breathe.jpg",
-            type: ['low-top', 'running'],
+            type:  'running',
             price: 60.00
         },
 
         {
             title: "Adidas Ultraboosts ATR",
             image: "img/Adidas_Ultraboosts_ATR.jpg",
-            type: ['high-top', 'walking'],
+            type:  'walking',
             price: 139.00
         },
 
         {
             title: "Kevin Durant 11 Grey",
             image: "img/Kevin_Durant_11_Grey.jpg",
-            type: ['high-top', 'basketball'],
+            type:  'basketball',
             price: 93.00
         },
 
         {
             title: "Kyrie Three Samurai",
             image: "img/Kyrie_Three_Samurai.jpg",
-            type: ['low-top', 'basketball'],
+            type:  'basketball',
             price: 120.00
         },
     ];
-
-    // Categories to sort by
-    const possibleTypes = ['high-top', 'low-top', 'basketball', 'running', 'walking'];
-
 
     // Display products inside of #content-container
     function renderCards(products) {
@@ -70,13 +66,13 @@
 
         _cardContainer.innerHTML = '';
 
+
         let _cards = products.map(function(product) {
-            return '<div id="content-container"></div>' +
-                   '<div class="card"></div>' +
-                   '<div class="card-content"</div>' +
-                   '<div class="title"></div>' + product.title +
-                   '<img alt="Product Image" src="'+  product.image +'">' +
-                   '<div class="price"></div>' + '$' + product.price;
+            return '<div class="card"><img alt="Product image" src="'+ product.image + '">'
+                +  '<div class="card-content"><h3>' + product.title +
+                   '</h3><div class="price">' + product.price +
+                   '</div></div></div>';
+
         });
 
         _cards.forEach(function(_card) {
@@ -86,68 +82,62 @@
 
     renderCards(productData);
 
-    let orderByTitle = ((sortValue) => {
+    let orderBy = (( sortValue) => {
 
-        let sortedResults = (sortValue === 'asc-title') ?
-            productData.sort((a, b) => {
+        let sortedResults = [];
+
+        if (sortValue === 'title') {
+            sortedResults = productData.sort((a, b) => {
                 a.title.toLowerCase();
                 b.title.toLowerCase();
-
                 return a.title > b.title ? -1 : 1;
-            }):
-            productData.sort((a, b) => {
-                a.title.toLowerCase();
-                b.title.toLowerCase();
-
-                return a.title < b.title ? 1 : -1;
             });
+        } else {
+            sortedResults = productData.sort((a,b) => {
+                return a[sortValue] - b[sortValue];
+            });
+        }
 
         renderCards(sortedResults);
     });
 
-    let orderByPrice = ((sortValue) => {
-       let sortedResults = (sortValue === 'asc-price') ?
-        productData.sort((a, b) => {
-            return a.price - b.price;
-        }):
-       productData.sort((a,b) => {
-             return b.price - a.price;
-           });
+    document.querySelector('#orderBy').addEventListener('change', function (event) {
 
-        renderCards(sortedResults);
+        orderBy(event.target.value);
+
     });
 
-    let setPriceRange = ((min, max) => {
-        let filteredResults = productData.filter((productData) => {
-            return productData.price >= min && productData.price <= max;
+
+
+    let filterPriceRange = (( priceDescription) => {
+        let priceRanges = {cheap: [50, 100], medium: [101, 200], expensive: [201, 100000]};
+        let range = priceRanges[priceDescription];
+
+        if (!range) return renderCards(productData);
+
+        let filteredResults = productData.filter(function(_card) {
+            return _card.price > range[0] && _card.price < range[1];
         });
         renderCards(filteredResults);
     });
 
-    let setType = (possibleTypes) => {
-        let filteredResults = productData.filter((productData) => {
-            return productData.type.includes(possibleTypes);
+    document.querySelector('#priceRange').addEventListener('change', function(event) {
+        filterPriceRange(event.target.value);
+    });
+
+    let filterType = (type) => {
+
+        if (!type) return renderCards(productData);
+
+        let filteredResults = productData.filter((_card) => {
+            return _card.type === type;
         });
         renderCards(filteredResults);
     };
 
-    // Event Listener to hook onto changes made upon select
-    document.querySelector('.orderBy').addEventListener('change', function (event) {
+    document.querySelector('#type').addEventListener('change', function (event) {
 
-        let orderBy = document.getElementsByClassName('.orderBy');
-        let sortValue = orderBy.options[orderBy.selectedIndex].value;
-
-       switch(sortValue) {
-
-          case 'asc-title': orderByTitle('asc-title');
-          break;
-          case 'desc-title': orderByTitle('desc-title');
-          break;
-          case 'asc-price': orderByPrice('asc-price');
-          break;
-          case 'desc-price': orderByPrice('desc-price');
-       }
-
+        filterType(event.target.value);
 
     });
 })();
